@@ -28,11 +28,12 @@ public class GameActivity extends AppCompatActivity {
     private int mScore;
     private int mTotalGuesses;
 
-    private Random random;
-    private Handler handler;
-    private TextView questionNumberTextView;
-    private ImageView questionImageView;
-    private TableLayout buttonTableLayout;
+    private Random mRandom;
+    private Handler mHandler;
+    private TextView mQuestionNumberTextView;
+    private ImageView mQuestionImageView;
+    private TableLayout mButtonTableLayout;
+    private TextView mAnswerTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +42,27 @@ public class GameActivity extends AppCompatActivity {
         int diff = i.getIntExtra(MainActivity.KEY_DIFFICULTY,0);
         Log.i(TAG,"Difficyty: "+diff);
 
-        mNumChoise=2*diff+2;
+        switch (diff){
+            case 0:
+                mNumChoise = 2;
+                break;
+            case 1:
+                mNumChoise = 4;
+                break;
+            case 2:
+                mNumChoise = 6;
+                break;
+        }
+
         Log.i(TAG,"Numchoice : "+mNumChoise);
+
+        setupViews();
+    }
+
+    private void setupViews(){
+        mButtonTableLayout = (TableLayout) findViewById(R.id.buttonTableLayout);
+        mQuestionNumberTextView = (TextView) findViewById(R.id.questionNumberTextView);
+        mQuestionImageView = (ImageView) findViewById(R.id.questionImageView);
 
     }
 
